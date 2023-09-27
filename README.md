@@ -1,0 +1,2 @@
+# Othello
+Basic Unity game
