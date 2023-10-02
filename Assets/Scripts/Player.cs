@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Player : MonoBehaviour
+public enum Player
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    None, Black, White
+}
 
-    // Update is called once per frame
-    void Update()
+public static class PlayerExtensions
+{
+    public static Player Opponent(this Player player)
     {
-        
+        if (player == Player.Black)
+        {
+            return Player.White;
+        }
+        else if (player == Player.White)
+        {
+            return Player.Black;
+        }
+
+        return Player.None;
     }
 }
