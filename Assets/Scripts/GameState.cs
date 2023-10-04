@@ -24,7 +24,7 @@ public class GameState
         {
             {Player.Black, 2 },
             {Player.White, 2 }
-        }
+        };
 
         CurrentPlayer = Player.Black;
     }
