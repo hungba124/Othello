@@ -42,7 +42,7 @@ public class GameState
 
         while (IsInsideBoar(r, c) && Board[r, c] != Player.None)
         {
-            if (Board[r, c] === player.Opponent())
+            if (Board[r, c] == player.Opponent())
             {
                 outflanked.Add(new Position(r, c));
                 r += rDelta;
@@ -52,8 +52,8 @@ public class GameState
             {
                 return outflanked;
             }
-
-            return new List<Position>();
         }
+
+        return new List<Position>();
     }
 }
