@@ -61,9 +61,9 @@ public class GameState
     {
         List<Position> outflanked = new List<Position>();
 
-        for (int rDelta = -1; rDelta < = 1; rDelta++)
+        for (int rDelta = -1; rDelta <= 1; rDelta++)
         {
-            for (int cDelta = -1; cDelta < 1; cDelta++)
+            for (int cDelta = -1; cDelta <= 1; cDelta++)
             {
                 if (rDelta == 0 && cDelta == 0)
                 {
