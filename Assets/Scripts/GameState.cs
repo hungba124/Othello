@@ -56,4 +56,24 @@ public class GameState
 
         return new List<Position>();
     }
+
+    private List<Position> Outflanked(Position pos, Player player)
+    {
+        List<Position> outflanked = new List<Position>();
+
+        for (int rDelta = -1; rDelta < = 1; rDelta++)
+        {
+            for (int cDelta = -1; cDelta < 1; cDelta++)
+            {
+                if (rDelta == 0 && cDelta == 0)
+                {
+                    continue;
+                }
+
+                outflanked.AddRange(OutflankedInDir(pos, player, rDelta, cDelta));
+            }
+        }
+
+        return outflanked;
+    }
 }
