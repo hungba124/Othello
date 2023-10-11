@@ -76,4 +76,16 @@ public class GameState
 
         return outflanked;
     }
+
+    private bool IsMoveLegal(Player player, Position pos, out List<Position> outflanked)
+    {
+        if (Board[pos.Row, pos.Col] != Player.None)
+        {
+            outflanked = null;
+            return false;
+        }
+
+        outflanked = Outflanked(pos, player);
+        return outflanked.Count > 0;
+    }
 }
