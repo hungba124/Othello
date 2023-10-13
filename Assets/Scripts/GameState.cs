@@ -27,6 +27,7 @@ public class GameState
         };
 
         CurrentPlayer = Player.Black;
+        LegalMoves = FindLegalMove(CurrentPlayer);
     }
 
     private bool IsInsideBoar(int r, int c)
@@ -87,5 +88,25 @@ public class GameState
 
         outflanked = Outflanked(pos, player);
         return outflanked.Count > 0;
+    }
+
+    private Dictionary<Position, List<Position>> FindLegalMove(Player player)
+    {
+        Dictionary<Position, List<Position>> legalMoves = new Dictionary<Position, List<Position>>();
+
+        for (int r = 0; r < Rows; r++)
+        {
+            for (int c  = 0; c < Cols; c++)
+            {
+                Position pos = new Position(r, c);
+
+                if (IsMoveLegal(player, pos, out List<Position> outflanked))
+                {
+                    legalMoves[pos] = outflanked;
+                }
+            }
+        }
+
+        return legalMoves;
     }
 }
