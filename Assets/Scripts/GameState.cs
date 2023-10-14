@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 public class GameState
 {
     public const int Rows = 8;
@@ -28,6 +26,26 @@ public class GameState
 
         CurrentPlayer = Player.Black;
         LegalMoves = FindLegalMove(CurrentPlayer);
+    }
+
+    public bool MakeMove(Position pos, out MoveInfo moveInfo)
+    {
+        if (!LegalMoves.ContainsKey(pos))
+        {
+            moveInfo = null;
+            return false;
+        }
+
+        CurrentPlayer movePlayer = CurrentPlayer;
+        List<Position> outflanked = LegalMoves[pos];
+
+        Board[pos.Row, pos.Column] = movePlayer;
+        // flip discs
+        // update disc counts
+        // pass turn
+
+        moveInfo = new MoveInfo { Player = movePlayer, Position = pos, Outflanked = outflanked };
+        return true;
     }
 
     private bool IsInsideBoar(int r, int c)
@@ -96,7 +114,7 @@ public class GameState
 
         for (int r = 0; r < Rows; r++)
         {
-            for (int c  = 0; c < Cols; c++)
+            for (int c = 0; c < Cols; c++)
             {
                 Position pos = new Position(r, c);
 
