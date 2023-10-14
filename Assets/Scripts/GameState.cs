@@ -38,10 +38,10 @@ public class GameState
             return false;
         }
 
-        CurrentPlayer movePlayer = CurrentPlayer;
+        Player movePlayer = CurrentPlayer;
         List<Position> outflanked = LegalMoves[pos];
 
-        Board[pos.Row, pos.Column] = movePlayer;
+        Board[pos.Row, pos.Col] = movePlayer;
         // flip discs
         // update disc counts
         // pass turn
