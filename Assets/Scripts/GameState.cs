@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class GameState
 {
     public const int Rows = 8;
