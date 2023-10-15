@@ -64,6 +64,27 @@ public class GameState
         DiscCount[movePlayer.Opponent()] -= outflankedCount;
     }
 
+    private void ChangePlayer()
+    {
+        CurrentPlayer = CurrentPlayer.Opponent();
+        LegalMoves = FindLegalMove(CurrentPlayer);
+    }
+
+    private Player FindWinner()
+    {
+        if (DiscCount[Player.Black] > DiscCount[Player.White])
+        {
+            return Player.Black;
+        }
+
+        if (DiscCount[Player.Black] < DiscCount[Player.White])
+        {
+            return Player.White;
+        }
+
+        return Player.None;
+    }
+
     private bool IsInsideBoar(int r, int c)
     {
         return r >= 0 && r < Rows && c >= 0 && c < Cols;
