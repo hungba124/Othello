@@ -42,12 +42,26 @@ public class GameState
         List<Position> outflanked = LegalMoves[pos];
 
         Board[pos.Row, pos.Col] = movePlayer;
-        // flip discs
-        // update disc counts
+        FlipDiscs(outflanked);
+        UpdateDiscCounts(movePlayer, outflanked.Count);
         // pass turn
 
         moveInfo = new MoveInfo { Player = movePlayer, Position = pos, Outflanked = outflanked };
         return true;
+    }
+
+    private void FlipDiscs(List<Position> positions)
+    {
+        foreach (Position pos in positions)
+        {
+            Board[pos.Row, pos.Col] = Board[pos.Row, pos.Col].Opponent();
+        }
+    }
+
+    private void UpdateDiscCounts(Player movePlayer, int outflankedCount)
+    {
+        DiscCount[movePlayer] += outflankedCount + 1;
+        DiscCount[movePlayer.Opponent()] -= outflankedCount;
     }
 
     private bool IsInsideBoar(int r, int c)
