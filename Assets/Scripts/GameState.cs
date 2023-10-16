@@ -44,10 +44,24 @@ public class GameState
         Board[pos.Row, pos.Col] = movePlayer;
         FlipDiscs(outflanked);
         UpdateDiscCounts(movePlayer, outflanked.Count);
-        // pass turn
+        PassTurn();
 
         moveInfo = new MoveInfo { Player = movePlayer, Position = pos, Outflanked = outflanked };
         return true;
+    }
+
+    public IEnumerable<Position> OccupiedPositions()
+    {
+        for (int r = 0; r < Rows; r++)
+        {
+            for (int c = 0; c < Cols; c++)
+            {
+                if (Board[r, c] != Player.None)
+                {
+                    yield return new Position(r, c);
+                }
+            }
+        }
     }
 
     private void FlipDiscs(List<Position> positions)
@@ -83,6 +97,25 @@ public class GameState
         }
 
         return Player.None;
+    }
+
+    private void PassTurn()
+    {
+        ChangePlayer();
+
+        if (LegalMoves.Count > 0)
+        {
+            return;
+        }
+
+        ChangePlayer();
+
+        if (LegalMoves.Count == 0)
+        {
+            CurrentPlayer = Player.None;
+            GameOver = true;
+            Winner = FindWinner();
+        }
     }
 
     private bool IsInsideBoar(int r, int c)
