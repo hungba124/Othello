@@ -41,4 +41,15 @@ public class GameManager : MonoBehaviour
 
         return new Position(row, col);
     }
+
+    private Vector3 BoardToScenePos(Position boardPos)
+    {
+        return new Vector3(boardPos.Col + 0.75f, 0, 7 - boardPos.Row + 0.75f);
+    }
+
+    private void SpawnDisc(Disc prefab, Position boardPos)
+    {
+        Vector3 scenePos = BoardToScenePos(boardPos) + Vector3.up * 0.1f;
+        discs[boardPos.Row, boardPos.Col] = Instantiate(prefab, scenePos, Quaternion.identity);
+    }
 }
