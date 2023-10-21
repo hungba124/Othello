@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,12 +24,14 @@ public class GameManager : MonoBehaviour
     {
         discPrefabs[Player.Black] = discBlackUp;
         discPrefabs[Player.White] = discWhiteUp;
+
+        AddStartDiscs();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private Position SceneToBoardPos(Vector3 scenePos)
@@ -51,5 +52,14 @@ public class GameManager : MonoBehaviour
     {
         Vector3 scenePos = BoardToScenePos(boardPos) + Vector3.up * 0.1f;
         discs[boardPos.Row, boardPos.Col] = Instantiate(prefab, scenePos, Quaternion.identity);
+    }
+
+    private void AddStartDiscs()
+    {
+        foreach (Position boardPos in gameState.OccupiedPositions())
+        {
+            Player player = gameState.Board[boardPos.Row, boardPos.Col];
+            SpawnDisc(discPrefabs[player], boardPos);
+        }
     }
 }
