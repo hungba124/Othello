@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8364381775649576598}
   - component: {fileID: 5220071435837395068}
   m_Layer: 0
-  m_Name: DiscWhitekUp
+  m_Name: DiscWhiteUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,23 +90,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4485c0d9d51598429d7b35d2ab35bd5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4485c0d9d51598429d7b35d2ab35bd5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4485c0d9d51598429d7b35d2ab35bd5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4485c0d9d51598429d7b35d2ab35bd5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4485c0d9d51598429d7b35d2ab35bd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4485c0d9d51598429d7b35d2ab35bd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,9 +30,37 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, boardLayer))
+            {
+                Vector3 impact = hitInfo.point;
+                Position boardPos = SceneToBoardPos(impact);
+                OnBoardClicked(boardPos);
+            }
+        }
+    }
+
+    private void OnBoardClicked(Position boardPos)
+    {
+        if (gameState.MakeMove(boardPos, out MoveInfo moveInfo))
+        {
+            StartCoroutine(OnMoveMade(moveInfo));
+        }
+    }
+
+    private IEnumerator OnMoveMade(MoveInfo moveInfo)
+    {
+        yield return ShowMove(moveInfo);
     }
 
     private Position SceneToBoardPos(Vector3 scenePos)
@@ -61,5 +90,21 @@ public class GameManager : MonoBehaviour
             Player player = gameState.Board[boardPos.Row, boardPos.Col];
             SpawnDisc(discPrefabs[player], boardPos);
         }
+    }
+
+    private void FlipDiscs(List<Position> positions)
+    {
+        foreach (Position boardPos in positions)
+        {
+            discs[boardPos.Row, boardPos.Col].Flip();
+        }
+    }
+
+    private IEnumerator ShowMove(MoveInfo moveInfo)
+    {
+        SpawnDisc(discPrefabs[moveInfo.Player], moveInfo.Position);
+        yield return new WaitForSeconds(0.33f);
+        FlipDiscs(moveInfo.Outflanked);
+        yield return new WaitForSeconds(0.83f);
     }
 }
