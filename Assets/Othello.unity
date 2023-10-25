@@ -525,6 +525,7 @@ MonoBehaviour:
     m_Bits: 8
   discBlackUp: {fileID: 5220071435837395068, guid: e88aec55cd2ff164b932cbb781fc6fe2, type: 3}
   discWhiteUp: {fileID: 5220071435837395068, guid: c20ff0f93a2e16f46b3a2a57a0a596a6, type: 3}
+  highlightPrefab: {fileID: 1295536224653464411, guid: b870ce4101bd7eb448391c9e51d73d5f, type: 3}
 --- !u!4 &1781309589
 Transform:
   m_ObjectHideFlags: 0
