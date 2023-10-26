@@ -8,9 +8,6 @@ public class GameManager : MonoBehaviour
     private Camera cam;
 
     [SerializeField]
-    private LayerMask boardLayer;
-
-    [SerializeField]
     private Disc discBlackUp;
 
     [SerializeField]
@@ -22,7 +19,6 @@ public class GameManager : MonoBehaviour
     private Dictionary<Player, Disc> discPrefabs = new Dictionary<Player, Disc>();
     private GameState gameState = new GameState();
     private Disc[,] discs = new Disc[8, 8];
-    private bool canMove = true;
     private List<GameObject> highlights = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -47,7 +43,7 @@ public class GameManager : MonoBehaviour
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, boardLayer))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo))
             {
                 Vector3 impact = hitInfo.point;
                 Position boardPos = SceneToBoardPos(impact);
@@ -74,11 +70,6 @@ public class GameManager : MonoBehaviour
 
     private void OnBoardClicked(Position boardPos)
     {
-        if (!canMove)
-        {
-            return;
-        }
-
         if (gameState.MakeMove(boardPos, out MoveInfo moveInfo))
         {
             StartCoroutine(OnMoveMade(moveInfo));
@@ -87,11 +78,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator OnMoveMade(MoveInfo moveInfo)
     {
-        canMove = false;
         HideLegalMoves();
         yield return ShowMove(moveInfo);
         ShowLegalMoves();
-        canMove = true;
     }
 
     private Position SceneToBoardPos(Vector3 scenePos)
