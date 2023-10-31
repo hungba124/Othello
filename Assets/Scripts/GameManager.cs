@@ -132,4 +132,10 @@ public class GameManager : MonoBehaviour
         FlipDiscs(moveInfo.Outflanked);
         yield return new WaitForSeconds(0.83f);
     }
+
+    private IEnumerator ShowTurnSkipped(Player skippedPlayer)
+    {
+        uiManager.SetSkippedText(skippedPlayer);
+        yield return uiManager.AnimateTopText();
+    }
 }

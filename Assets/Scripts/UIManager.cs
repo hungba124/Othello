@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -30,8 +29,27 @@ public class UIManager : MonoBehaviour
         {
             topText.text = "Black's Turn <sprite name=DiscBlackUp>";
         }
-        else if (currentPlayer == Player.White) {
+        else if (currentPlayer == Player.White)
+        {
             topText.text = "White's Turn <sprite name=DiscWhiteUp>";
         }
+    }
+
+    public void SetSkippedText(Player skippedPlayer)
+    {
+        if (skippedPlayer == Player.Black)
+        {
+            topText.text = "Black Cannot Move! <sprite name=DiscBlackUp>";
+        }
+        else if (skippedPlayer == Player.White)
+        {
+            topText.text = "White Cannot Move! <sprite name=DiscWhiteUp>";
+        }
+    }
+
+    public IEnumerator AnimateTopText()
+    {
+        topText.transform.LeanScale(Vector3.one * 1.2f, 0.25f).setLoopPingPong(4);
+        yield return new WaitForSeconds(2);
     }
 }
