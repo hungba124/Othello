@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     {
         HideLegalMoves();
         yield return ShowMove(moveInfo);
-        uiManager.SetPlayerText(gameState.CurrentPlayer);
+        yield return ShowTurnOutCome(moveInfo);
         ShowLegalMoves();
     }
 
@@ -137,5 +137,23 @@ public class GameManager : MonoBehaviour
     {
         uiManager.SetSkippedText(skippedPlayer);
         yield return uiManager.AnimateTopText();
+    }
+
+    private IEnumerator ShowTurnOutCome(MoveInfo moveInfo)
+    {
+        if (gameState.GameOver)
+        {
+            // Show game over
+            yield break;
+        }
+
+        Player currentPlayer = gameState.CurrentPlayer;
+
+        if (currentPlayer == moveInfo.Player)
+        {
+            yield return ShowTurnSkipped(currentPlayer.Opponent());
+        }
+
+        uiManager.SetPlayerText(currentPlayer);
     }
 }
