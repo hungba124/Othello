@@ -139,11 +139,19 @@ public class GameManager : MonoBehaviour
         yield return uiManager.AnimateTopText();
     }
 
+    private IEnumerator ShowGameOver(Player winner)
+    {
+        uiManager.SetTopText("Neither Player Can Move");
+        yield return uiManager.AnimateTopText();
+
+        yield return uiManager.ShowScoreText();
+    }
+
     private IEnumerator ShowTurnOutCome(MoveInfo moveInfo)
     {
         if (gameState.GameOver)
         {
-            // Show game over
+            yield return ShowGameOver(gameState.Winner);
             yield break;
         }
 
