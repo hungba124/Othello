@@ -145,6 +145,9 @@ public class GameManager : MonoBehaviour
         yield return uiManager.AnimateTopText();
 
         yield return uiManager.ShowScoreText();
+        yield return new WaitForSeconds(0.5f);
+
+        yield return ShowCounting();
     }
 
     private IEnumerator ShowTurnOutCome(MoveInfo moveInfo)
@@ -163,5 +166,29 @@ public class GameManager : MonoBehaviour
         }
 
         uiManager.SetPlayerText(currentPlayer);
+    }
+
+    private IEnumerator ShowCounting()
+    {
+        int black = 0, white = 0;
+
+        foreach (Position pos in gameState.OccupiedPositions())
+        {
+            Player player = gameState.Board[pos.Row, pos.Col];
+
+            if (player == Player.Black)
+            {
+                black++;
+                uiManager.SetBlackScoreText(black);
+            }
+            else if (player == Player.White)
+            {
+                white++;
+                uiManager.SetWhiteScoreText(white);
+            }
+
+            discs[pos.Row, pos.Col].Twitch();
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }
