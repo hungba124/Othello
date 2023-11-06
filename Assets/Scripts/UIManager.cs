@@ -89,4 +89,12 @@ public class UIManager : MonoBehaviour
     {
         blackScoreText.text = $"<sprite name=DiscWhiteUp> {score}";
     }
+
+    private IEnumerator ShowOverlay()
+    {
+        blackOverlay.gameObject.SetActive(true);
+        blackOverlay.color = Color.clear;
+        blackOverlay.rectTransform.LeanAlpha(0.8f, 1);
+        yield return new WaitForSeconds(1);
+    }
 }
