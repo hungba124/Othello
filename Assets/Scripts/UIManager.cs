@@ -97,4 +97,11 @@ public class UIManager : MonoBehaviour
         blackOverlay.rectTransform.LeanAlpha(0.8f, 1);
         yield return new WaitForSeconds(1);
     }
+
+    private IEnumerator HideOverlay()
+    {
+        blackOverlay.rectTransform.LeanAlpha(0, 1);
+        yield return new WaitForSeconds(1);
+        blackOverlay.gameObject.SetActive(false);
+    }
 }
