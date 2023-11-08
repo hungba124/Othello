@@ -104,4 +104,36 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         blackOverlay.gameObject.SetActive(false);
     }
+
+    private IEnumerator MoveScoreDown()
+    {
+        blackScoreText.rectTransform.LeanMoveY(0, 0.5f);
+        whiteScoreText.rectTransform.LeanMoveY(0, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+    }
+
+    public void SetWinnerText(Player winner)
+    {
+        if (winner == Player.Black)
+        {
+            winnerText.text = "Black Won!";
+        }
+        else if (winner == Player.White)
+        {
+            winnerText.text = "White Won!";
+        }
+        else
+        {
+            winnerText.text = "It's a Tie!";
+        }
+    }
+
+    public IEnumerator ShowEndScreen()
+    {
+        yield return ShowOverlay();
+        yield return MoveScoreDown();
+        yield return ScaleUp(winnerText.rectTransform);
+        yield return ScaleUp(playAgainButton);
+    }
+
 }
