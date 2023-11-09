@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
 
     public void SetWhiteScoreText(int score)
     {
-        blackScoreText.text = $"<sprite name=DiscWhiteUp> {score}";
+        whiteScoreText.text = $"<sprite name=DiscWhiteUp> {score}";
     }
 
     private IEnumerator ShowOverlay()
@@ -136,4 +136,14 @@ public class UIManager : MonoBehaviour
         yield return ScaleUp(playAgainButton);
     }
 
+    public IEnumerator HideEndScreen()
+    {
+        StartCoroutine(ScaleDown(winnerText.rectTransform));
+        StartCoroutine(ScaleDown(blackScoreText.rectTransform));
+        StartCoroutine(ScaleDown(whiteScoreText.rectTransform));
+        StartCoroutine(ScaleDown(playAgainButton));
+
+        yield return new WaitForSeconds(0.5f);
+        yield return HideOverlay();
+    }
 }
